@@ -36,6 +36,8 @@ html, body{
 .screen{
     background-color: black;
     grid-area: screen;
+    color: white;
+    padding: 10px;
 }
 
 .one{
