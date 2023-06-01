@@ -118,7 +118,7 @@ html, body{
     color: black;
 }
 
-button {
+button , button:active{
     background-color: lightgray;
     outline: none;
     cursor: pointer;
@@ -134,7 +134,17 @@ button {
     color: black;
 }
 
+.number:active {
+    background-color: #BDBDBD;
+    color: black;
+}
+
 .operator:hover {
     background-color: #DFB184;
+    color: white;
+}
+
+.operator:active {
+    background-color: #CC7722;
     color: white;
 }
