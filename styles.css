@@ -118,7 +118,7 @@ html, body{
     color: black;
 }
 
-button , button:active{
+button {
     background-color: lightgray;
     outline: none;
     cursor: pointer;
@@ -129,12 +129,12 @@ button , button:active{
     font-size: 40px;
 }
 
-.number:hover {
+.number:hover, .delete:hover, .clear:hover {
     background-color: #E0E0E0;
     color: black;
 }
 
-.number:active {
+.number:active, .delete:active, .clear:active {
     background-color: #BDBDBD;
     color: black;
 }
