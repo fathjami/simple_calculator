@@ -1,54 +1,73 @@
+let screen = document.querySelector(".screen");
+let display = "0";
+let result = null;
+let lastOperator = null;
+function handleClick(value){
+    console.log(value);
+    if (isNaN(parseInt(value)))
+        handleSymbole(value);
+    else
+        handleNumber(value);
 
-const calculator = document.querySelector(".calculator");
-let result = 0;
-let op = "";
-calculator.addEventListener("click", (event) => {
-    const screen = document.querySelector(".screen");
-    if (event.target.classList.contains("number")) {
-        if (screen.textContent === "0")
-            screen.textContent = "";
-        screen.textContent += event.target.textContent;
-    }
-    if (event.target.classList.contains("delete")) {
-        screen.textContent = screen.textContent.slice(0, -1);
-        if (screen.textContent === "")
-            screen.textContent = "0";
-    }
-    if (event.target.classList.contains("clear")) {
-        screen.textContent = "0";
-    }
-    if (event.target.classList.contains("operator") && event.target.textContent !== "=") {
-     const number = Number(screen.textContent);
-        const operator = event.target.textContent;
-        screen.textContent = "0";
-        if (operator === "+") {
-            result += number;
-        }
-        if (operator === "-") {
-            result -= number;
-        }
-        if (operator === "x") {
-            result *= number;
-        }
-        if (operator === "/") {
-            result /= number;
-        }
-        op = operator;
-    }
+    screen.textContent = display;
+}
 
-    if (event.target.classList.contains("equal")) {
-        if (op === "+") {
-            screen.textContent = result + Number(screen.textContent);
-        }
-        if (op === "-") {
-            screen.textContent = result + Number(screen.textContent);
-        }
-        if (op === "x") {
-            screen.textContent = result * Number(screen.textContent);
-        }
-        if (op === "/") {
-            screen.textContent = result / Number(screen.textContent);
-        }
-        result = 0;
+function handleSymbole(value){
+    if (value === "C"){
+        display = "0";
+        result = null;
     }
-});
+    else if (value === "←")
+    {
+        console.log("display.lenth: ", display.length)
+        if (display.length === 1){
+            display = "0";
+            result = null;
+        }
+        else
+            display = display.slice(0, display.length - 1);
+    } else if (value === "+" || value === "-" || value === "x" || value === "/" || value === "=")
+        doMath(value);
+}
+
+function doMath(value){
+    if (result === null){
+        result = parseInt(display);
+    }
+    else {
+        if (lastOperator === "+")
+            result += parseInt(display);
+        else if (lastOperator === "-")
+            result -= parseInt(display);
+        else if (lastOperator === "x")
+            result *= parseInt(display);
+        else if (lastOperator === "/")
+            result /= parseInt(display);
+        if (value === "="){
+            display = result;
+            lastOperator = null;
+            return;
+        }
+    }
+    display = "0";
+    lastOperator = value;
+
+}
+function  handleNumber(value){
+
+    if (display === "0")
+        display = value;
+    else
+        display += value;
+}
+function main () {
+    document
+        .querySelector(".calculator")
+        .addEventListener("click", function (event){
+            if (event.target.classList.contains("screen"))
+                return;
+            handleClick(event.target.innerText);
+        });
+}
+
+main();
